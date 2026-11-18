@@ -1,0 +1,23 @@
+{
+  "name": "LUNIBOP — Small Bun. Big Moon Energy.",
+  "short_name": "LUNIBOP",
+  "description": "Meet LUNIBOP, the little moon bunny bringing magic to the Solana meme universe.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#170B35",
+  "theme_color": "#7139C9",
+  "icons": [
+    {
+      "src": "/images/mascot.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ],
+  "lang": "en"
+}

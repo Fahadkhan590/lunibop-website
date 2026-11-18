@@ -1,0 +1,227 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --cosmic-950: #170B35;
+  --cosmic-900: #1E1040;
+  --violet: #7139C9;
+  --lavender: #C6A6FF;
+  --softpink: #FFB9DE;
+  --moon: #FFF9FF;
+  --star: #FFD76A;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-padding-top: 80px;
+  /* Prevent horizontal scroll on all devices — critical for mobile */
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  background: #0F0728;
+  color: #FFF9FF;
+  overflow-x: hidden;
+  /* Prevent layout shift from scrollbar */
+  scrollbar-gutter: stable;
+  /* Better font rendering on all OS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  /* Ensure no horizontal overflow from fixed elements */
+  max-width: 100vw;
+  min-width: 320px;
+}
+
+/* Custom scrollbar - hidden on mobile for cleanliness */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #170B35;
+}
+::-webkit-scrollbar-thumb {
+  background: #7139C9;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8B5CF6;
+}
+
+/* Hide scrollbar on touch devices for cleaner look */
+@media (pointer: coarse) {
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+}
+
+/* Glass effect - with fallback for browsers without backdrop-filter */
+.glass {
+  background: rgba(255, 249, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 249, 255, 0.08);
+}
+
+@supports not (backdrop-filter: blur(16px)) {
+  .glass {
+    background: rgba(23, 11, 53, 0.85);
+  }
+}
+
+.glass-strong {
+  background: rgba(255, 249, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(198, 166, 255, 0.15);
+}
+
+@supports not (backdrop-filter: blur(20px)) {
+  .glass-strong {
+    background: rgba(23, 11, 53, 0.9);
+  }
+}
+
+/* Cosmic gradients - optimized to not cause repaint issues */
+.cosmic-bg {
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(113,57,201,0.5), transparent 60%),
+              radial-gradient(ellipse 90% 70% at 80% 80%, rgba(255,185,222,0.12), transparent 50%),
+              radial-gradient(ellipse 70% 50% at 10% 90%, rgba(113,57,201,0.25), transparent 50%),
+              linear-gradient(180deg, #0F0728 0%, #170B35 30%, #1A0F3A 60%, #170B35 100%);
+}
+
+/* Starfield */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Noise texture overlay */
+.noise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* Focus styles - highly visible for keyboard navigation on all devices */
+*:focus-visible {
+  outline: 2px solid #C6A6FF;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Ensure all interactive elements have min touch target 44px on touch devices */
+@media (pointer: coarse) {
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  /* Exception for inline text links */
+  p a, li a, span a {
+    min-height: auto;
+    min-width: auto;
+  }
+}
+
+/* Fluid typography - scales smoothly across all screen sizes */
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 375px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 17px;
+  }
+}
+
+/* Prevent zoom on input focus for iOS - critical for mobile UX */
+input, textarea, select {
+  font-size: 16px;
+}
+
+@media (max-width: 640px) {
+  input, textarea, select {
+    font-size: 16px !important;
+  }
+}
+
+/* Ensure images never overflow container on any device */
+img, picture, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Ensure pre/code blocks don't overflow on mobile */
+pre, code {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+/* Line clamp utilities for cards - prevents overflow on small screens */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Reduced motion - respect user preference on all devices */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass, .glass-strong {
+    border-width: 2px;
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Print styles - for users who print pages */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .cosmic-bg {
+    background: white !important;
+  }
+  header, footer {
+    display: none !important;
+  }
+}
